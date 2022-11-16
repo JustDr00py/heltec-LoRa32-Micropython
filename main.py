@@ -16,11 +16,13 @@ device_spi = SoftSPI(baudrate = 10000000,
 
 lora = SX127x(device_spi, pins=device_config, parameters=lora_parameters)
 
-example = 'sender'
-#example = 'receiver'
+node = 'sensor' #sender/relay/gateway
 
 if __name__ == '__main__':
-    if example == 'sender':
+    if node == 'sensor':
         LoRaSender.send(lora)
-    if example == 'receiver':
+    if node == 'relay':
+        #LoRaReceiver.receive(lora)
+        LoRaSender.send(lora)
+    if node == 'gateway':
         LoRaReceiver.receive(lora)
